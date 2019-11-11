@@ -25,7 +25,7 @@ app.get('/movies', (req,res) => {
 })
 
 app.put('/movies', (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     const queryText = 
     `UPDATE movies
     SET title= $1,

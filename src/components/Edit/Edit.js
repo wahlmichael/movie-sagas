@@ -33,6 +33,7 @@ class Edit extends Component {
 
     handleSaveClick = () => {
         this.props.dispatch({ type: 'EDIT_MOVIE', payload: this.state })
+        this.props.history.push('/details')
     }
   render() {
     return (
@@ -44,7 +45,7 @@ class Edit extends Component {
           <br/>
           <textarea onChange={this.handleDescriptionChange}/>
           <p>edit {this.props.reduxState.singleMovie.title}</p>
-          <pre>{JSON.stringify(this.state)}</pre>
+          {/* <pre>{JSON.stringify(this.state)}</pre> */}
       </div>
     );
   }

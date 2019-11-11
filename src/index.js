@@ -22,7 +22,7 @@ function* rootSaga() {
 
 function* editMovieSaga(action) { 
     try {
-        console.log(action.payload)
+        // console.log(action.payload)
         axios({
             method: 'PUT',
             url: '/movies',
@@ -32,6 +32,8 @@ function* editMovieSaga(action) {
                 id: action.payload.id,
             }
         })
+        const movieResponse = yield axios.get('/movies');
+        yield put ({ type: 'SET_MOVIE', payload: movieResponse.data[action.payload.id - 1]})
     } catch(error) {
         console.log('error editing movie', error)
     }
