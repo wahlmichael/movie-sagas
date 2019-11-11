@@ -21,6 +21,8 @@ class Details extends Component {
           <button onClick={this.handleEditClick}>Edit</button>
           <h1>{this.props.reduxState.singleMovie.title}</h1>
           <p>{this.props.reduxState.singleMovie.description}</p>
+          <p>{this.props.reduxState.singleMovie.genre_array}</p>
+          <pre>{JSON.stringify(this.props.reduxState.singleMovie.genre_array)}</pre>
       </div>
     );
   }

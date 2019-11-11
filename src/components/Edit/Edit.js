@@ -7,15 +7,43 @@ const mapReduxStateToProps = reduxState => ({
 });
 
 class Edit extends Component { 
+    state = {
+        title: '',
+        description: '',
+    }
+
+    handleTitleChange = (event) => {
+        this.setState({
+            ...this.state,
+            title: event.target.value
+        })
+    }
+
+    handleDescriptionChange = (event) => {
+        this.setState({
+            ...this.state,
+            description: event.target.value
+        })
+    }
+
     handleCancelClick = () => {
         this.props.history.push('/details')
+    }
+
+    handleSaveClick = () => {
+        this.props.dispatch({ type: 'EDIT_MOVIE', payload: this.state })
     }
   render() {
     return (
       <div>
           <button onClick={this.handleCancelClick}>Cancel</button>
-          <button>Save</button>
+          <button onClick={this.handleSaveClick}>Save</button>
+          <br/>
+          <input onChange={this.handleTitleChange}></input>
+          <br/>
+          <textarea onChange={this.handleDescriptionChange}/>
           <p>edit {this.props.reduxState.singleMovie.title}</p>
+          <pre>{JSON.stringify(this.state)}</pre>
       </div>
     );
   }

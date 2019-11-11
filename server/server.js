@@ -23,6 +23,10 @@ app.get('/movies', (req,res) => {
     })
 })
 
+app.put('/movies', (req, res) => {
+    const queryText = ``
+})
+
 
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {
