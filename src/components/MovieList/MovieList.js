@@ -24,12 +24,14 @@ class MovieList extends Component {
       <div>
         {this.props.reduxState.movies.map(movie => {
             return <MovieItem
+                id={movie.id}
                 title={movie.title}
                 poster={movie.poster}
                 description={movie.description}
+                movie={movie}
             />
         })}
-        <pre>{JSON.stringify(this.props.reduxState.movies)}</pre>
+        {/* <pre>{JSON.stringify(this.props.reduxState.movies)}</pre> */}
       </div>
     );
   }

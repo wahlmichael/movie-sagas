@@ -7,9 +7,15 @@ const mapReduxStateToProps = reduxState => ({
 });
 
 class MovieItem extends Component { 
+    handleClick(movie){
+        console.log('movie clicked at id', movie.id)
+        this.props.dispatch({ type: 'SET_SINGLE_MOVIE', payload: this.props.movie.id })
+        this.props.history.push(`/details`)
+    }
+
   render() {
     return (
-      <div className="movieCard">
+      <div onClick={() => this.handleClick(this.props.movie)} className="movieCard">
           <img src={this.props.poster}></img>
           <div>
               <h2>{this.props.title}</h2>
@@ -20,4 +26,4 @@ class MovieItem extends Component {
   }
 }
 
-export default MovieItem;
+export default withRouter(connect(mapReduxStateToProps)(MovieItem));
