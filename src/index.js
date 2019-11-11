@@ -17,7 +17,25 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('GET_MOVIES', movieSaga)
     yield takeEvery('SET_SINGLE_MOVIE', singleMovieSaga)
+    yield takeEvery('EDIT_MOVIE', editMovieSaga)
 }
+
+function* editMovieSaga(action) { 
+    try {
+        console.log(action.payload)
+        axios({
+            method: 'PUT',
+            url: '/movies',
+            data: {
+                title: action.payload.title,
+                description: action.payload.description,
+                id: action.payload.id,
+            }
+        })
+    } catch(error) {
+        console.log('error editing movie', error)
+    }
+  }
 
 function* singleMovieSaga(action) { // sets state to the information of the movie that was clicked
     try {

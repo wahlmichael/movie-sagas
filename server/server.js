@@ -10,7 +10,8 @@ app.use(express.static('build'));
 
 /** ---------- ROUTES ---------- **/
 app.get('/movies', (req,res) => {
-    const queryText = `SELECT movies.id,title,poster,description,ARRAY_AGG(name) as genre_array FROM movies_genres
+    const queryText = 
+    `SELECT movies.id,title,poster,description,ARRAY_AGG(name) as genre_array FROM movies_genres
     JOIN movies ON movies.id=movies_genres.movie_id
     JOIN genres ON genres.id=movies_genres.genre_id
     GROUP BY movies.id,title,description,poster
@@ -24,7 +25,18 @@ app.get('/movies', (req,res) => {
 })
 
 app.put('/movies', (req, res) => {
-    const queryText = ``
+    console.log(req.body)
+    const queryText = 
+    `UPDATE movies
+    SET title= $1,
+    description= $2
+    WHERE id= $3;`;
+    pool.query(queryText, [req.body.title, req.body.description, req.body.id])
+    .then(result => {res.sendStatus(200)})
+    .catch((error) => {
+        console.log("Error in PUT movies")
+        res.sendStatus(500);
+    })
 })
 
 

@@ -10,6 +10,7 @@ class Edit extends Component {
     state = {
         title: '',
         description: '',
+        id: this.props.reduxState.singleMovie.id,
     }
 
     handleTitleChange = (event) => {
