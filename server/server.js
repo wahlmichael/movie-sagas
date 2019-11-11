@@ -10,7 +10,11 @@ app.use(express.static('build'));
 
 /** ---------- ROUTES ---------- **/
 app.get('/movies', (req,res) => {
-    const queryText = 'SELECT * FROM "movies"';
+    const queryText = `SELECT movies.id,title,poster,description,ARRAY_AGG(name) as genre_array FROM movies_genres
+    JOIN movies ON movies.id=movies_genres.movie_id
+    JOIN genres ON genres.id=movies_genres.genre_id
+    GROUP BY movies.id,title,description,poster
+    ORDER BY id asc;`;
     pool.query(queryText)
     .then((result) => {res.send(result.rows)})
     .catch((error) => {
