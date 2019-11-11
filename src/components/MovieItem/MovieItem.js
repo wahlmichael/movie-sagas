@@ -10,7 +10,7 @@ class MovieItem extends Component {
     handleClick(movie){
         console.log('movie clicked at id', movie.id)
         this.props.dispatch({ type: 'SET_SINGLE_MOVIE', payload: this.props.movie.id })
-        this.props.history.push(`/details`)
+        this.props.history.push('/details')
     }
 
   render() {

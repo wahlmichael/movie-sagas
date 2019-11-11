@@ -19,7 +19,7 @@ function* rootSaga() {
     yield takeEvery('SET_SINGLE_MOVIE', singleMovieSaga)
 }
 
-function* singleMovieSaga(action) {
+function* singleMovieSaga(action) { // sets state to the information of the movie that was clicked
     try {
         const movieResponse = yield axios.get('/movies');
         yield put ({ type: 'SET_MOVIE', payload: movieResponse.data[action.payload - 1]})
@@ -28,7 +28,7 @@ function* singleMovieSaga(action) {
     }
   }
 
-function* movieSaga() {
+function* movieSaga() { // sets state to all movies
     try {
         const movieResponse = yield axios.get('/movies');
         yield put ({ type: 'SET_MOVIES', payload: movieResponse.data})
@@ -60,7 +60,7 @@ const genres = (state = [], action) => {
     }
 }
 
-const singleMovie = (state = {}, action) => {
+const singleMovie = (state = {}, action) => { // 
     switch(action.type){
         case 'SET_MOVIE':
             return action.payload;
